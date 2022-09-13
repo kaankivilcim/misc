@@ -16,7 +16,7 @@ type ExchangeRate struct {
 	Change  bool   `json:"change"`
 	EndDate string `json:"end_date"`
 	Quotes  struct {
-		Chfaud struct {
+		CHFAUD struct {
 			Change    float64 `json:"change"`
 			ChangePct float64 `json:"change_pct"`
 			EndRate   float64 `json:"end_rate"`
@@ -85,7 +85,7 @@ func main() {
 		log.Panicln(err)
 	}
 
-	msg := fmt.Sprintf("CHF to AUD is %0.3f (%0.3f%% change)", rate.Quotes.Chfaud.EndRate, rate.Quotes.Chfaud.ChangePct)
+	msg := fmt.Sprintf("CHF to AUD is %0.3f (%0.3f%% change)", rate.Quotes.CHFAUD.EndRate, rate.Quotes.CHFAUD.ChangePct)
 	m := pushover.New(token, target)
 	_, err = m.Send("Exchange rate", msg)
 	if err != nil {
