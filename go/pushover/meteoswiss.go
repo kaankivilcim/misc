@@ -63,7 +63,7 @@ func getForecastURL() string {
 	return fmt.Sprintf("https://www.meteoswiss.admin.ch/product/output/forecast-map/version__%s_%s/en/chmap_%s.json", today, val[1], today)
 }
 
-func getToken() string {
+func getPushoverToken() string {
 	token := os.Getenv("PUSHOVER_TOKEN")
 	if len(token) == 0 {
 		log.Panicln("Environment variable PUSHOVER_TOKEN was not set")
@@ -71,7 +71,7 @@ func getToken() string {
 	return token
 }
 
-func getTarget() string {
+func getPushoverTarget() string {
 	if len(os.Args[1:]) != 1 {
 		log.Panicln("Target user/group key was not supplied")
 	}
@@ -79,8 +79,8 @@ func getTarget() string {
 }
 
 func main() {
-	token := getToken()
-	target := getTarget()
+	token := getPushoverToken()
+	target := getPushoverTarget()
 
 	url := getForecastURL()
 	req, err := http.NewRequest("POST", url, nil)
